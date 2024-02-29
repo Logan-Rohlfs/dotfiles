@@ -1,0 +1,29 @@
+alias ls='ls --color'
+alias ll='ls -lah'
+alias la='ls -A'
+alias l='ls -l'
+
+alias c='clear'
+alias ..='cd ..'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+
+alias md='mkdir -p'
+alias rd='rmdir'
+alias d='dirs -v | head -10'
+alias tree='tree -a'
+
+
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git pull'
+alias gb='git branch'
+alias gco='git checkout'
+alias glog='git log --oneline --graph --decorate'
+
+alias h='history'
+alias j='jobs -l'
+alias v='vim'
+alias grep='grep --color=auto'
