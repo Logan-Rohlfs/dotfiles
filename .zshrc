@@ -23,3 +23,4 @@ source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Enable syntax highlighting
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export PATH="/usr/local/bin/nvim:$PATH"
