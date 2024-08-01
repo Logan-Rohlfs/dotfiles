@@ -27,3 +27,7 @@ alias h='history'
 alias j='jobs -l'
 alias v='vim'
 alias grep='grep --color=auto'
+
+# Rustlings
+
+alias rw='rustlings watch'
