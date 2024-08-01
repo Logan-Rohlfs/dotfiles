@@ -33,3 +33,6 @@ eval "$(pyenv init -)"
 
 # Created by `pipx` on 2024-08-01 23:13:42
 export PATH="$PATH:/Users/loganrohlfs/.local/bin"
+
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
