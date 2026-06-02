@@ -5,6 +5,8 @@
 [delta]
 	navigate = true
 	side-by-side = true
+[pull]
+	rebase = true
 [merge]
 	conflictstyle = zdiff3
 [user]

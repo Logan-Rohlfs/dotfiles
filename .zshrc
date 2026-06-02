@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git macos sudo copypath web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -113,20 +113,19 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 if type brew &>/dev/null; then
+  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   autoload -Uz compinit && compinit
 fi
-eval "$(fzf --zsh)"
-eval "$(zoxide init zsh)"
+command -v fzf &>/dev/null && eval "$(fzf --zsh)"
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+command -v thefuck &>/dev/null && eval $(thefuck --alias)
 
-plugins=(git macos sudo copypath web-search)
 alias ls="eza --icons"
 alias ll="eza -lah --icons --git"
 alias lt="eza --tree --icons"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-eval $(thefuck --alias)
