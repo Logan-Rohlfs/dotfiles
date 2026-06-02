@@ -123,6 +123,44 @@ command -v fzf &>/dev/null && eval "$(fzf --zsh)"
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 command -v thefuck &>/dev/null && eval $(thefuck --alias)
 
+# Plain click to reposition cursor
+autoload -Uz add-zle-hook-widget
+typeset -g _ZLE_PROMPT_END_COL=1
+
+function _zle_mouse_enable() {
+  printf '\e[6n'
+  local pos
+  read -r -s -t 0.2 -d 'R' pos 2>/dev/null
+  _ZLE_PROMPT_END_COL=$(( ${${pos##*;}:-1} ))
+  printf '\e[?1000h\e[?1006h'
+}
+
+function _zle_mouse_disable() {
+  printf '\e[?1000l\e[?1006l'
+}
+
+function _zle_mouse_handler() {
+  local char seq=""
+  while read -rsk1 char; do
+    seq+="$char"
+    [[ "$char" == [Mm] ]] && break
+  done
+  [[ "${seq: -1}" != "M" ]] && return
+  local button="${seq%%';'*}"
+  [[ "$button" != "0" ]] && return
+  local col="${${seq#*;}%%;*}"
+  local target=$(( col - _ZLE_PROMPT_END_COL ))
+  (( target < 0 )) && target=0
+  (( target > ${#BUFFER} )) && target=${#BUFFER}
+  CURSOR=$target
+  zle redisplay
+}
+
+zle -N _zle_mouse_handler
+add-zle-hook-widget zle-line-init _zle_mouse_enable
+add-zle-hook-widget zle-line-finish _zle_mouse_disable
+bindkey '\e[<' _zle_mouse_handler
+
 # Word deletion/navigation (requires iTerm2 Left Option Key = Esc+)
 bindkey '\e\x7f' backward-kill-word   # Option+Backspace: delete word left
 bindkey '\e[3;3~' kill-word           # Option+Delete:    delete word right
