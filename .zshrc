@@ -123,6 +123,14 @@ command -v fzf &>/dev/null && eval "$(fzf --zsh)"
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 command -v thefuck &>/dev/null && eval $(thefuck --alias)
 
+# Word deletion/navigation (requires iTerm2 Left Option Key = Esc+)
+bindkey '\e\x7f' backward-kill-word   # Option+Backspace: delete word left
+bindkey '\e[3;3~' kill-word           # Option+Delete:    delete word right
+bindkey '\e[1;3D' backward-word       # Option+Left:      move word left
+bindkey '\e[1;3C' forward-word        # Option+Right:     move word right
+bindkey '\e[H'    beginning-of-line   # Cmd+Left:         jump to line start
+bindkey '\e[F'    end-of-line         # Cmd+Right:        jump to line end
+
 alias ls="eza --icons"
 alias ll="eza -lah --icons --git"
 alias lt="eza --tree --icons"
