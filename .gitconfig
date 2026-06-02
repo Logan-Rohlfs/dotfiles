@@ -7,3 +7,6 @@
 	side-by-side = true
 [merge]
 	conflictstyle = zdiff3
+[user]
+	name = Logan-Rohlfs
+	email = loganrohlfs76@gmail.com
